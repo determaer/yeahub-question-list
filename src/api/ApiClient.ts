@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from "axios";
+import { isResponsePublicQuestions } from "../types/Question";
 
 class ApiClient {
   axios: AxiosInstance;
@@ -10,7 +11,7 @@ class ApiClient {
 
     this.axios.interceptors.response.use(
       (response) => {
-        return response.data;
+        return response;
       },
       (error) => {
         return Promise.reject(error);
@@ -22,6 +23,8 @@ class ApiClient {
     try {
       const response = await this.axios.get(`/questions/public-questions`);
       console.log(response);
+      if (isResponsePublicQuestions(response.data)) return response.data;
+      else throw new Error("server wasnt able to send public questions");
     } catch (e) {
       console.log(e);
     }

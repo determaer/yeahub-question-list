@@ -2,6 +2,8 @@ import { createContext, use, useState, type ReactNode } from "react";
 
 type FilterStoreValue = {
   page: number;
+  pagesCount: number;
+  total: number;
   limit: number;
   searchQuery: string;
   specializations: unknown[];
@@ -11,6 +13,8 @@ type FilterStoreValue = {
   handleSetPage: (newPage: number) => void;
   handleSetLimit: (newLimit: number) => void;
   handleSetSearchQuery: (newSearchQuery: string) => void;
+  handleSetTotal: (newTotal: number) => void;
+  handleSetPagesCount: (newPagesCount: number) => void;
 };
 
 const FilterStoreContext = createContext<FilterStoreValue | null>(null);
@@ -19,6 +23,8 @@ export function FilterStoreProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState({
     page: 0,
     limit: 10,
+    total: 0,
+    pagesCount: 0,
     searchQuery: "",
     specializations: [],
     skills: [],
@@ -38,11 +44,21 @@ export function FilterStoreProvider({ children }: { children: ReactNode }) {
     setState((prev) => ({ ...prev, searchQuery: newSearchQuery }));
   };
 
+  const handleSetTotal = (newTotal: number) => {
+    setState((prev) => ({ ...prev, total: newTotal }));
+  };
+
+  const handleSetPagesCount = (newPagesCount: number) => {
+    setState((prev) => ({ ...prev, pagesCount: newPagesCount }));
+  };
+
   const value = {
     ...state,
     handleSetPage,
     handleSetLimit,
     handleSetSearchQuery,
+    handleSetTotal,
+    handleSetPagesCount,
   };
 
   return <FilterStoreContext value={value}>{children}</FilterStoreContext>;
