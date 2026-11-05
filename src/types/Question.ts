@@ -4,6 +4,7 @@ export type PublicQuestion = {
   rate: number;
   complexity: number;
   shortAnswer: string;
+  longAnswer: string;
 };
 
 type ResponsePublicQuestions = {
