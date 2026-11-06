@@ -5,7 +5,7 @@ import {
   isResponsePublicQuestions,
   type PublicQuestion,
 } from "../types/Question";
-import QuestionItem from "./QuestionItem";
+import QuestionItem from "./QuestionItem/QuestionItem";
 
 export default function () {
   const [questions, setQuestions] = useState<PublicQuestion[]>([]);
@@ -30,7 +30,7 @@ export default function () {
     <>
       <ul>
         {questions.map((quest) => (
-          <QuestionItem question={quest} />
+          <QuestionItem key={`question-${quest.id}`} question={quest} />
         ))}
       </ul>
       {filterStore.pagesCount > 1 && <Pagination />}

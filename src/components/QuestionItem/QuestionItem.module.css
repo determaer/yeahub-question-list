@@ -1,0 +1,45 @@
+.container {
+  padding: 16px 24px;
+  box-shadow: 0px 4px 10px 0px rgba(106, 99, 118, 0.1);
+  list-style: none;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerText::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: purple;
+  border-radius: 50%;
+}
+
+.answerSection {
+}
+
+.answerText {
+}
+
+.answerText * {
+  padding: revert;
+  margin: revert;
+}
+
+.tagsLine {
+}
+
+.tagObject {
+}
+
+.tagValue {
+}

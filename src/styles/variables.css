@@ -1,0 +1,25 @@
+:root {
+  /**-----Colors-----*/
+
+  --color-primary-bg: #ffffff;
+  --color-secondary-bg: #f4f4f4;
+
+  --color-primary-text: #191919;
+  --color-secondary-text: #303030;
+  --color-tertiary-text: #474747;
+
+  --color-primary-text-inverted: #ffffff;
+  --color-secondary-text-inverted: #8c8c8c;
+
+  --color-accent: #6a0bff;
+  --color-accent-text: #6a0bff;
+  --color-action-text: #5509cc;
+
+  /**-----Typography-----*/
+
+  --font-family: "Manrope", sans-serif;
+  --fw-regular: 400; /* reg */
+  --fw-medium: 500; /* med */
+  --fw-semibold: 600; /* sb */
+  --fw-bold: 700; /* strong / h1-h3 */
+}
