@@ -2,7 +2,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
-import QuestionList from "./components/QuestionList";
+import QuestionList from "./components/QuestionList/QuestionList";
 import SidebarFilters from "./components/SidebarFilters";
 
 function App() {

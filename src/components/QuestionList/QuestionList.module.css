@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background-color: var(--color-primary-bg);
+  padding: 24px 20px 40px 20px;
+  border-radius: 24px;
+}
+
+.header {
+  padding: 0px 10px 16px 0px;
+  border-bottom: 1px solid var(--color-delimiter);
+  margin-bottom: 24px;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.paginationContainer {
+  align-self: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.paginationDirectionButton {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paginationDirectionButton:disabled {
+  border: 1px solid var(--color-tertiary-text);
+  cursor: not-allowed;
+}
+
+.paginationDirectionButton:disabled svg {
+  color: var(--color-tertiary-text);
+}
+
+.paginationCurrentNumberButton {
+  padding: 2px 6px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  color: white;
+  height: 100%;
+}
+
+.paginationSparse {
+  align-self: baseline;
+}

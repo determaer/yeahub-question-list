@@ -1,11 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
-import { api } from "../api/ApiClient";
-import { useFilterStore } from "../store/filterStore";
+import { api } from "../../api/ApiClient";
+import { useFilterStore } from "../../store/filterStore";
 import {
   isResponsePublicQuestions,
   type PublicQuestion,
-} from "../types/Question";
-import QuestionItem from "./QuestionItem/QuestionItem";
+} from "../../types/Question";
+import QuestionItem from "../QuestionItem/QuestionItem";
+import styles from "./QuestionList.module.css";
+import ArrowLeft from "../icons/ArrowLeft";
+import ArrowRight from "../icons/ArrowRight";
 
 export default function () {
   const [questions, setQuestions] = useState<PublicQuestion[]>([]);
@@ -27,14 +30,17 @@ export default function () {
   }, []);
 
   return (
-    <>
-      <ul>
-        {questions.map((quest) => (
-          <QuestionItem key={`question-${quest.id}`} question={quest} />
-        ))}
-      </ul>
+    <div className={styles.container}>
+      <div>
+        <h1 className={styles.header}>Вопросы</h1>
+        <ul className={styles.questionList}>
+          {questions.map((quest) => (
+            <QuestionItem key={`question-${quest.id}`} question={quest} />
+          ))}
+        </ul>
+      </div>
       {filterStore.pagesCount > 1 && <Pagination />}
-    </>
+    </div>
   );
 }
 
@@ -65,19 +71,39 @@ function Pagination() {
 
   const pages = computePages(filterStore.page, filterStore.pagesCount, 2);
 
+  const disableLeftDirectionButton = filterStore.page == 1;
+
   return (
-    <div>
-      <button>left</button>
+    <div className={styles.paginationContainer}>
+      <button
+        disabled={disableLeftDirectionButton}
+        className={styles.paginationDirectionButton}
+      >
+        <ArrowLeft />
+      </button>
+
       {pages.map((indicator, index) => (
         <Fragment key={`pagination-button-${indicator}-${index}`}>
           {indicator === "..." ? (
-            <span>...</span>
+            <span className={styles.paginationSparse}>...</span>
           ) : (
-            <button>{indicator}</button>
+            <button
+              className={`
+                ${filterStore.page === Number(indicator) ? styles.paginationCurrentNumberButton : ""}
+                `}
+            >
+              {indicator}
+            </button>
           )}
         </Fragment>
       ))}
-      <button>right</button>
+
+      <button
+        disabled={filterStore.page == filterStore.pagesCount}
+        className={styles.paginationDirectionButton}
+      >
+        <ArrowRight />
+      </button>
     </div>
   );
 }
