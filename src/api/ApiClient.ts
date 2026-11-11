@@ -19,9 +19,14 @@ class ApiClient {
     );
   }
 
-  async getPublicQuestions() {
+  async getPublicQuestions(page: number, limit: number) {
     try {
-      const response = await this.axios.get(`/questions/public-questions`);
+      const response = await this.axios.get(`/questions/public-questions`, {
+        params: {
+          page,
+          limit,
+        },
+      });
       console.log(response);
       if (isResponsePublicQuestions(response.data)) return response.data;
       else throw new Error("server wasnt able to send public questions");

@@ -16,18 +16,21 @@ export default function () {
 
   useEffect(() => {
     const getQuestions = async () => {
-      const questionsData = await api.getPublicQuestions();
+      const questionsData = await api.getPublicQuestions(
+        filterStore.page,
+        filterStore.limit,
+      );
       if (!isResponsePublicQuestions(questionsData)) return;
+
       setQuestions(questionsData.data);
-      filterStore.handleSetLimit(questionsData.limit);
-      filterStore.handleSetPage(questionsData.page);
       filterStore.handleSetTotal(questionsData.total);
       filterStore.handleSetPagesCount(
         Math.ceil(questionsData.total / questionsData.limit),
       );
     };
+
     getQuestions();
-  }, []);
+  }, [filterStore.page, filterStore.limit]);
 
   return (
     <div className={styles.container}>
@@ -71,13 +74,26 @@ function Pagination() {
 
   const pages = computePages(filterStore.page, filterStore.pagesCount, 2);
 
-  const disableLeftDirectionButton = filterStore.page == 1;
+  const handleChangePage = (
+    type: "left" | "right" | "number",
+    number?: number,
+  ) => {
+    const currentPage = filterStore.page;
+    const redirectToPage = {
+      left: currentPage - 1,
+      right: currentPage + 1,
+      number: number ?? 1,
+    };
+
+    filterStore.handleSetPage(redirectToPage[type]);
+  };
 
   return (
     <div className={styles.paginationContainer}>
       <button
-        disabled={disableLeftDirectionButton}
+        disabled={filterStore.page == 1}
         className={styles.paginationDirectionButton}
+        onClick={() => handleChangePage("left")}
       >
         <ArrowLeft />
       </button>
@@ -88,6 +104,7 @@ function Pagination() {
             <span className={styles.paginationSparse}>...</span>
           ) : (
             <button
+              onClick={() => handleChangePage("number", Number(indicator))}
               className={`
                 ${filterStore.page === Number(indicator) ? styles.paginationCurrentNumberButton : ""}
                 `}
@@ -101,6 +118,7 @@ function Pagination() {
       <button
         disabled={filterStore.page == filterStore.pagesCount}
         className={styles.paginationDirectionButton}
+        onClick={() => handleChangePage("right")}
       >
         <ArrowRight />
       </button>
