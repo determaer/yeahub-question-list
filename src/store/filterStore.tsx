@@ -21,10 +21,10 @@ const FilterStoreContext = createContext<FilterStoreValue | null>(null);
 
 export function FilterStoreProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState({
-    page: 0,
+    page: 1,
     limit: 10,
     total: 0,
-    pagesCount: 0,
+    pagesCount: 1,
     searchQuery: "",
     specializations: [],
     skills: [],
