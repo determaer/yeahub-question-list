@@ -10,7 +10,7 @@ import styles from "./QuestionList.module.css";
 import ArrowLeft from "../icons/ArrowLeft";
 import ArrowRight from "../icons/ArrowRight";
 
-export default function () {
+export default function QuestionList() {
   const [questions, setQuestions] = useState<PublicQuestion[]>([]);
   const filterStore = useFilterStore();
 

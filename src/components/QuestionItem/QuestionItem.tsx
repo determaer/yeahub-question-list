@@ -6,7 +6,11 @@ import openedIcon from "../../assets/Opened.svg";
 import closedIcon from "../../assets/Closed.svg";
 import styles from "./QuestionItem.module.css";
 
-export default function ({ question }: { question: PublicQuestion }) {
+export default function QuestionItem({
+  question,
+}: {
+  question: PublicQuestion;
+}) {
   const [reveal, setReveal] = useState(false);
 
   const handleControlShortAnswer = () => {

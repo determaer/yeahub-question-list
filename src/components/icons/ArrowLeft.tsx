@@ -4,7 +4,7 @@ interface IconProps extends SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
-export default function ({
+export default function ArrowLeft({
   color = "currentColor",
   size = 20,
   ...props

@@ -29,7 +29,7 @@ const DIFFICULTIES = [
 
 const RATINGS = [1, 2, 3, 4, 5];
 
-export default function () {
+export default function SidebarFilters() {
   const filterStore = useFilterStore();
 
   const [specializations, setSpecializations] = useState<Specialization[]>([]);
