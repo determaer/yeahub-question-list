@@ -36,9 +36,14 @@ class ApiClient {
     }
   }
 
-  async getSpecializations() {
+  async getSpecializations(page = 1, limit = 10) {
     try {
-      const response = await this.axios.get(`/specializations`);
+      const response = await this.axios.get(`/specializations`, {
+        params: {
+          page,
+          limit,
+        },
+      });
       if (isResponseSpecialization(response.data)) return response.data;
       else throw new Error("server wasnt able to send specializations");
     } catch (e) {
@@ -46,9 +51,15 @@ class ApiClient {
     }
   }
 
-  async getSkills() {
+  async getSkills(page = 1, limit = 10, specializationID?: number | null) {
     try {
-      const response = await this.axios.get(`/skills`);
+      const response = await this.axios.get(`/skills`, {
+        params: {
+          page,
+          limit,
+          specializations: specializationID,
+        },
+      });
       if (isResponseSkill(response.data)) return response.data;
       else throw new Error("server wasnt able to send skills");
     } catch (e) {

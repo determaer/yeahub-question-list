@@ -1,7 +1,7 @@
 export type Skill = {
   id: number;
   title: string;
-  imageSrc: string;
+  imageSrc?: string;
 };
 
 type ResponseSkill = {
@@ -16,8 +16,7 @@ export function isSkill(obj: any): obj is Skill {
     obj !== null &&
     typeof obj === "object" &&
     typeof obj.id === "number" &&
-    typeof obj.title === "string" &&
-    typeof obj.imageSrc === "string"
+    typeof obj.title === "string"
   );
 }
 

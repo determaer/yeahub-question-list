@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { api } from "../../api/ApiClient";
 import {
   isResponseSpecialization,
@@ -40,24 +40,67 @@ export default function () {
       const newSpecs = await api.getSpecializations();
       if (!isResponseSpecialization(newSpecs)) return;
 
-      const newSkills = await api.getSkills();
-      if (!isResponseSkill(newSkills)) return;
-
       setSpecializations(newSpecs.data);
-      setSkills(newSkills.data);
     }
 
     get();
   }, []);
 
+  useEffect(() => {
+    async function get() {
+      const newSkills = await api.getSkills(
+        undefined,
+        undefined,
+        filterStore.specialization,
+      );
+      if (!isResponseSkill(newSkills)) return;
+      console.log(newSkills.data);
+      setSkills(newSkills.data);
+    }
+
+    get();
+  }, [filterStore.specialization]);
+
+  const handleSelectSpecialization = (specializationId: number) => {
+    if (filterStore.specialization !== specializationId)
+      filterStore.handleSetSpecialization(specializationId);
+    else if (filterStore.specialization === specializationId)
+      filterStore.handleSetSpecialization(null);
+  };
+
+  const handleSelectMultipleValue = (
+    key: "skills" | "difficulty" | "rating",
+    ...value: number[]
+  ) => {
+    filterStore.handleToggleMultipleValue(key, ...value);
+  };
+
+  const debTimerSearchQuery = useRef<number>(null);
+
+  const handleChangeSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
+    if (debTimerSearchQuery.current !== null) {
+      clearTimeout(debTimerSearchQuery.current);
+    }
+
+    debTimerSearchQuery.current = setTimeout(() => {
+      filterStore.handleSetSearchQuery(event.target.value);
+    }, 500);
+  };
+
   return (
     <section className={styles.container}>
-      <input />
+      <input type="text" onChange={handleChangeSearchQuery} />
       <fieldset>
         <legend>Специализация</legend>
         {specializations.map((item) => (
           <label key={`specialization-${item.id}`}>
-            <input type="radio" />
+            <input
+              name="specialization"
+              type="radio"
+              readOnly
+              checked={filterStore.specialization === item.id}
+              onClick={() => handleSelectSpecialization(item.id)}
+            />
             {item.title}
           </label>
         ))}
@@ -67,8 +110,14 @@ export default function () {
         <legend>Навыки</legend>
         {skills.map((item) => (
           <label key={`skill-${item.id}`}>
-            <input type="checkbox" />
-            <img loading="lazy" src={item.imageSrc} alt=" " />
+            <input
+              type="checkbox"
+              onChange={() => {
+                handleSelectMultipleValue("skills", item.id);
+              }}
+              checked={filterStore.skills.includes(item.id)}
+            />
+            {item.imageSrc && <img loading="lazy" src={item.imageSrc} alt="" />}
             {item.title}
           </label>
         ))}
@@ -78,7 +127,15 @@ export default function () {
         <legend>Уровень сложности</legend>
         {DIFFICULTIES.map((item) => (
           <label key={`difficulty-${item.title}`}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              onChange={() => {
+                handleSelectMultipleValue("difficulty", ...item.value);
+              }}
+              checked={item.value.every((val) =>
+                filterStore.difficulty.includes(val),
+              )}
+            />
             {item.title}
           </label>
         ))}
@@ -88,7 +145,13 @@ export default function () {
         <legend>Рейтинг</legend>
         {RATINGS.map((item) => (
           <label key={`rating-${item}`}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              onChange={() => {
+                handleSelectMultipleValue("rating", item);
+              }}
+              checked={filterStore.rating.includes(item)}
+            />
             {item}
           </label>
         ))}
