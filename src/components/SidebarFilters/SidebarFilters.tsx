@@ -6,6 +6,7 @@ import {
 } from "../../types/Specialization";
 import { useFilterStore } from "../../store/filterStore";
 import { isResponseSkill, type Skill } from "../../types/Skill";
+import styles from "./SidebarFilters.module.css";
 
 const DIFFICULTIES = [
   {
@@ -50,7 +51,7 @@ export default function () {
   }, []);
 
   return (
-    <div>
+    <section className={styles.container}>
       <input />
       <fieldset>
         <legend>Специализация</legend>
@@ -92,6 +93,6 @@ export default function () {
           </label>
         ))}
       </fieldset>
-    </div>
+    </section>
   );
 }

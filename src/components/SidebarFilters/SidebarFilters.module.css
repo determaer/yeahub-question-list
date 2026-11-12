@@ -1,0 +1,7 @@
+.container {
+  max-width: 392px;
+  background-color: var(--color-primary-bg);
+  border-radius: 20px;
+  height: fit-content;
+  padding: 24px;
+}
