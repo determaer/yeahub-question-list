@@ -49,7 +49,7 @@ export function FilterStoreProvider({ children }: { children: ReactNode }) {
   };
 
   const handleSetSearchQuery = (newSearchQuery: string) => {
-    setState((prev) => ({ ...prev, searchQuery: newSearchQuery }));
+    setState((prev) => ({ ...prev, searchQuery: newSearchQuery, page: 1 }));
   };
 
   const handleSetTotal = (newTotal: number) => {
@@ -61,7 +61,12 @@ export function FilterStoreProvider({ children }: { children: ReactNode }) {
   };
 
   const handleSetSpecialization = (newSpec: number | null) => {
-    setState((prev) => ({ ...prev, specialization: newSpec }));
+    setState((prev) => ({
+      ...prev,
+      specialization: newSpec,
+      skills: [],
+      page: 1,
+    }));
   };
 
   const handleToggleMultipleValue = (

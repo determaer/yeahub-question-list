@@ -21,12 +21,26 @@ class ApiClient {
     );
   }
 
-  async getPublicQuestions(page: number, limit: number) {
+  async getPublicQuestions(
+    page: number,
+    limit: number,
+    titleOrDescription?: string,
+    skills?: number[],
+    complexity?: number[],
+    rate?: number[],
+    specializationId?: number | null,
+  ) {
+    console.log(arguments);
     try {
       const response = await this.axios.get(`/questions/public-questions`, {
         params: {
           page,
           limit,
+          titleOrDescription,
+          skills,
+          complexity,
+          rate,
+          specializationId,
         },
       });
       if (isResponsePublicQuestions(response.data)) return response.data;

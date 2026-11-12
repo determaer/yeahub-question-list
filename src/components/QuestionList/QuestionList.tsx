@@ -19,6 +19,11 @@ export default function () {
       const questionsData = await api.getPublicQuestions(
         filterStore.page,
         filterStore.limit,
+        filterStore.searchQuery,
+        filterStore.skills,
+        filterStore.difficulty,
+        filterStore.rating,
+        filterStore.specialization,
       );
       if (!isResponsePublicQuestions(questionsData)) return;
 
@@ -30,7 +35,15 @@ export default function () {
     };
 
     getQuestions();
-  }, [filterStore.page, filterStore.limit]);
+  }, [
+    filterStore.page,
+    filterStore.limit,
+    filterStore.searchQuery,
+    filterStore.skills,
+    filterStore.difficulty,
+    filterStore.rating,
+    filterStore.specialization,
+  ]);
 
   return (
     <div className={styles.container}>
