@@ -1,5 +1,7 @@
 import axios, { type AxiosInstance } from "axios";
 import { isResponsePublicQuestions } from "../types/Question";
+import { isResponseSpecialization } from "../types/Specialization";
+import { isResponseSkill } from "../types/Skill";
 
 class ApiClient {
   axios: AxiosInstance;
@@ -27,7 +29,6 @@ class ApiClient {
           limit,
         },
       });
-      console.log(response);
       if (isResponsePublicQuestions(response.data)) return response.data;
       else throw new Error("server wasnt able to send public questions");
     } catch (e) {
@@ -38,7 +39,8 @@ class ApiClient {
   async getSpecializations() {
     try {
       const response = await this.axios.get(`/specializations`);
-      console.log(response);
+      if (isResponseSpecialization(response.data)) return response.data;
+      else throw new Error("server wasnt able to send specializations");
     } catch (e) {
       console.log(e);
     }
@@ -47,7 +49,8 @@ class ApiClient {
   async getSkills() {
     try {
       const response = await this.axios.get(`/skills`);
-      console.log(response);
+      if (isResponseSkill(response.data)) return response.data;
+      else throw new Error("server wasnt able to send skills");
     } catch (e) {
       console.log(e);
     }

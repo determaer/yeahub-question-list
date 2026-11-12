@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import QuestionList from "./components/QuestionList/QuestionList";
-import SidebarFilters from "./components/SidebarFilters";
+import SidebarFilters from "./components/SidebarFilters/SidebarFilters";
 
 function App() {
   return (
