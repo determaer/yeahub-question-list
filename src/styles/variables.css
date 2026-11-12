@@ -17,6 +17,9 @@
 
   --color-delimiter: #e8e8e8;
 
+  --color-border: #bababa;
+  --color-border-selected: #6a0bff;
+
   /**-----Typography-----*/
 
   --font-family: "Manrope", sans-serif;

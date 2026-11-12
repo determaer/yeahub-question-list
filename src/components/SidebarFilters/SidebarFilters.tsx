@@ -89,11 +89,16 @@ export default function () {
 
   return (
     <section className={styles.container}>
-      <input type="text" onChange={handleChangeSearchQuery} />
-      <fieldset>
+      <input
+        type="text"
+        onChange={handleChangeSearchQuery}
+        className={styles.searchQuery}
+        placeholder="Введите запрос..."
+      />
+      <fieldset className={styles.fieldsetContainer}>
         <legend>Специализация</legend>
         {specializations.map((item) => (
-          <label key={`specialization-${item.id}`}>
+          <label key={`specialization-${item.id}`} className={styles.tagButton}>
             <input
               name="specialization"
               type="radio"
@@ -106,10 +111,10 @@ export default function () {
         ))}
       </fieldset>
 
-      <fieldset>
+      <fieldset className={styles.fieldsetContainer}>
         <legend>Навыки</legend>
         {skills.map((item) => (
-          <label key={`skill-${item.id}`}>
+          <label key={`skill-${item.id}`} className={styles.tagButton}>
             <input
               type="checkbox"
               onChange={() => {
@@ -123,10 +128,10 @@ export default function () {
         ))}
       </fieldset>
 
-      <fieldset>
+      <fieldset className={styles.fieldsetContainer}>
         <legend>Уровень сложности</legend>
         {DIFFICULTIES.map((item) => (
-          <label key={`difficulty-${item.title}`}>
+          <label key={`difficulty-${item.title}`} className={styles.tagButton}>
             <input
               type="checkbox"
               onChange={() => {
@@ -141,10 +146,10 @@ export default function () {
         ))}
       </fieldset>
 
-      <fieldset>
+      <fieldset className={styles.fieldsetContainer}>
         <legend>Рейтинг</legend>
         {RATINGS.map((item) => (
-          <label key={`rating-${item}`}>
+          <label key={`rating-${item}`} className={styles.tagButton}>
             <input
               type="checkbox"
               onChange={() => {
