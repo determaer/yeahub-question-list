@@ -1,6 +1,7 @@
 .container {
   padding: 16px 24px;
   box-shadow: 0px 4px 10px 0px rgba(106, 99, 118, 0.1);
+  border-radius: 8px;
   list-style: none;
 }
 
@@ -14,20 +15,20 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  text-align: initial;
+  font-size: 20px;
 }
 
 .headerText::before {
   content: "";
-  width: 8px;
+  min-width: 8px;
   height: 8px;
   background-color: purple;
   border-radius: 50%;
 }
 
 .answerSection {
-}
-
-.answerText {
+  margin-top: 24px;
 }
 
 .answerText * {
@@ -36,10 +37,24 @@
 }
 
 .tagsLine {
+  display: flex;
+  gap: 40px;
 }
 
 .tagObject {
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-tertiary-bg);
+  border-radius: 8px;
+  line-height: 120%;
+  font-size: 14px;
 }
 
 .tagValue {
+  color: var(--color-primary-text-inverted);
+  background-color: var(--color-accent);
+  border-radius: 4px;
+  padding: 2px 4px;
 }
