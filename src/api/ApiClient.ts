@@ -30,7 +30,6 @@ class ApiClient {
     rate?: number[],
     specializationId?: number | null,
   ) {
-    console.log(arguments);
     try {
       const response = await this.axios.get(`/questions/public-questions`, {
         params: {
@@ -46,7 +45,7 @@ class ApiClient {
       if (isResponsePublicQuestions(response.data)) return response.data;
       else throw new Error("server wasnt able to send public questions");
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -61,7 +60,7 @@ class ApiClient {
       if (isResponseSpecialization(response.data)) return response.data;
       else throw new Error("server wasnt able to send specializations");
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -77,7 +76,7 @@ class ApiClient {
       if (isResponseSkill(response.data)) return response.data;
       else throw new Error("server wasnt able to send skills");
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 }

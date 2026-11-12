@@ -54,7 +54,6 @@ export default function () {
         filterStore.specialization,
       );
       if (!isResponseSkill(newSkills)) return;
-      console.log(newSkills.data);
       setSkills(newSkills.data);
     }
 
